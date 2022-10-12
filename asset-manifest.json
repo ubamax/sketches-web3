@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/sketches-web3/static/css/main.7f0696d7.chunk.css",
+    "main.js": "/sketches-web3/static/js/main.cb535880.chunk.js",
+    "main.js.map": "/sketches-web3/static/js/main.cb535880.chunk.js.map",
+    "runtime-main.js": "/sketches-web3/static/js/runtime-main.79417f7c.js",
+    "runtime-main.js.map": "/sketches-web3/static/js/runtime-main.79417f7c.js.map",
+    "static/css/2.e70b8a41.chunk.css": "/sketches-web3/static/css/2.e70b8a41.chunk.css",
+    "static/js/2.04f8c90e.chunk.js": "/sketches-web3/static/js/2.04f8c90e.chunk.js",
+    "static/js/2.04f8c90e.chunk.js.map": "/sketches-web3/static/js/2.04f8c90e.chunk.js.map",
+    "index.html": "/sketches-web3/index.html",
+    "static/css/2.e70b8a41.chunk.css.map": "/sketches-web3/static/css/2.e70b8a41.chunk.css.map",
+    "static/css/main.7f0696d7.chunk.css.map": "/sketches-web3/static/css/main.7f0696d7.chunk.css.map",
+    "static/js/2.04f8c90e.chunk.js.LICENSE.txt": "/sketches-web3/static/js/2.04f8c90e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.79417f7c.js",
+    "static/css/2.e70b8a41.chunk.css",
+    "static/js/2.04f8c90e.chunk.js",
+    "static/css/main.7f0696d7.chunk.css",
+    "static/js/main.cb535880.chunk.js"
+  ]
+}

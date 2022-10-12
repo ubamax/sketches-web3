@@ -134,10 +134,27 @@ const Mint = () => {
             <div className="canv" style={{ height: "400px" }}>
               <ReactSketchCanvas strokeWidth={4} strokeColor={brushColor} />
             </div>
-            <input
-              type="color"
-              onChange={(e) => setBrushColor(e.target.value)}
-            />
+
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: "10px",
+              }}
+            >
+              <div>
+                <input
+                  type="color"
+                  onChange={(e) => setBrushColor(e.target.value)}
+                  style={{}}
+                />
+                <span style={{margin: "10px"}}>Select color</span>
+              </div>
+              <Button variant="dark" type="button" onClick={() => download()}>
+                Save
+              </Button>
+            </div>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Sketch Incription</Form.Label>
               <Form.Control
@@ -184,9 +201,7 @@ const Mint = () => {
               >
                 Close
               </Button>
-              <Button variant="dark" type="button" onClick={() => download()}>
-                Save
-              </Button>
+
               <Button
                 style={{ marginLeft: "auto" }}
                 disabled={!isFormFiled()}

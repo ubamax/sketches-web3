@@ -10,6 +10,7 @@ Sketches Dapp is an blockchain application for creating sketches on a canvas and
 - Upload saved sketch an mint as an NFT
 - Send minted sketch as a gift to a loved one
 
+
 [Live demo](https://ubamax.github.io/sketches-web3)
 
 ## :man_technologist: Languages/tools used for this project includes

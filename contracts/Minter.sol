@@ -14,13 +14,20 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("Sketches Tokens", "SKT") {}
 
-
+    /** modifier to check for the following conditions:
+        * 1. NFT exists
+        * 2. Caller is the owner of the NFT
+    
+    */
     modifier validCallerAndToken(uint tokenId){
         require(_exists(tokenId), "Invalid tokenId entered");
-        require(ownerOf(tokenId) == msg.sender, "Only owner or approved operator can gift the NFT");
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Only owner or approved operator can gift the NFT");
         _;
     }
 
+    /**
+        * @dev allow users to mint the NFT that will represent the Sketch
+     */
     function mint(string calldata _tokenURI) public returns (uint256) {
         require(bytes(_tokenURI).length > 7, "Enter a valid token uri"); //ipfs uri starts with "ipfs://"
         uint256 id = _tokenIdCounter.current();
@@ -30,11 +37,17 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return (id);
     }
 
+    /**
+        * @dev allow users to gift a sketch's NFT to a receiver
+     */
     function giftToken(uint256 tokenId, address _receiver) public validCallerAndToken(tokenId) {
         require(_receiver != address(0), "Invalid address entered");
         _transfer(msg.sender,_receiver, tokenId);
     }
 
+    /**
+        @dev allow authorized callers to delete and burn a sketch.
+     */
     function deleteToken(uint tokenId) public validCallerAndToken(tokenId) {
         _burn(tokenId);
     }

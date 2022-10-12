@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -14,7 +14,14 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("Sketches Tokens", "SKT") {}
 
-    function mint(string memory _tokenURI) public returns (uint256) {
+
+    modifier validCallerAndToken(uint tokenId){
+        require(_exists(tokenId), "Invalid tokenId entered");
+        require(ownerOf(tokenId) == msg.sender, "Only owner or approved operator can gift the NFT");
+        _;
+    }
+
+    function mint(string calldata _tokenURI) public returns (uint256) {
         require(bytes(_tokenURI).length > 7, "Enter a valid token uri"); //ipfs uri starts with "ipfs://"
         uint256 id = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -23,10 +30,13 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return (id);
     }
 
-    function giftToken(uint256 tokenId, address _receiver) public {
-        require(tokenId < _tokenIdCounter.current(), "Invalid tokenId entered");
+    function giftToken(uint256 tokenId, address _receiver) public validCallerAndToken(tokenId) {
         require(_receiver != address(0), "Invalid address entered");
         _transfer(msg.sender,_receiver, tokenId);
+    }
+
+    function deleteToken(uint tokenId) public validCallerAndToken(tokenId) {
+        _burn(tokenId);
     }
 
     function _beforeTokenTransfer(

@@ -156,7 +156,7 @@ const Mint = () => {
               </Button>
             </div>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Sketch Incription</Form.Label>
+              <Form.Label>Sketch Inscription</Form.Label>
               <Form.Control
                 type="text"
                 onChange={(e) => setName(e.target.value)}

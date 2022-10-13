@@ -14,8 +14,11 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("Sketches Tokens", "SKT") {}
 
-    function mint(string memory _tokenURI) public returns (uint256) {
+    uint mintFee = 0.1 ether;
+
+    function mint(string memory _tokenURI) external payable returns (uint256) {
         require(bytes(_tokenURI).length > 7, "Enter a valid token uri"); //ipfs uri starts with "ipfs://"
+        require(msg.value == mintFee, "sendFee");
         uint256 id = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, id);
@@ -23,7 +26,11 @@ contract Minter is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return (id);
     }
 
-    function giftToken(uint256 tokenId, address _receiver) public {
+    function withdrawFee() external onlyOwner{
+        payable(msg.sender).transfer(address(this).balance);
+    }
+
+    function giftToken(uint256 tokenId, address _receiver) external {
         require(tokenId < _tokenIdCounter.current(), "Invalid tokenId entered");
         require(_receiver != address(0), "Invalid address entered");
         _transfer(msg.sender,_receiver, tokenId);
